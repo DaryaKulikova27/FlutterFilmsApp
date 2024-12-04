@@ -1,6 +1,5 @@
 import 'package:crypto_coins_list/repositories/crypto_coins/crypto_coins.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class CryptoCoinsRepository implements AbstractCoinsRepository {
 

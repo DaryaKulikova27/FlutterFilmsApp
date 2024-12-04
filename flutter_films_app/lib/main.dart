@@ -9,7 +9,7 @@ void main() {
     CryptoCoinsRepository(dio: Dio())
   );
   
-  runApp(const CryptoCurrenciesListApp());
+  runApp(const SearchFilmsApp());
 }
 
 
