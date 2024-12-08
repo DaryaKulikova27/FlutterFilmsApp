@@ -1,4 +1,8 @@
+import 'package:crypto_coins_list/features/search_films/bloc/search_films_bloc.dart';
+import 'package:crypto_coins_list/repositories/search_films/search_films.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class SearchFilmsScreen extends StatefulWidget {
   const SearchFilmsScreen({super.key, required this.title});
@@ -9,8 +13,8 @@ class SearchFilmsScreen extends StatefulWidget {
 }
 
 class _SearchFilmsScreenState extends State<SearchFilmsScreen> {
+  final _searchFilmsBloc = SearchFilmsBloc(GetIt.I<AbstractFilmsRepository>());
   final TextEditingController _textController = TextEditingController();
-  String _enteredText = '';
   bool _isTextEntered = false;
 
   @override
@@ -23,14 +27,6 @@ class _SearchFilmsScreenState extends State<SearchFilmsScreen> {
     setState(() {
       _isTextEntered = _textController.text.isNotEmpty;
     });
-  }
-
-  void _sendText() {
-    if (_isTextEntered) {
-      setState(() {
-        _enteredText = _textController.text;
-      });
-    }
   }
 
   @override
@@ -47,37 +43,56 @@ class _SearchFilmsScreenState extends State<SearchFilmsScreen> {
       body: 
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: 80),
-              TextField(
-                controller: _textController,
-                decoration: InputDecoration(
-                  hintText: 'Search...',
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: GestureDetector(
-                    onTap: _sendText,
-                    child: Icon(
-                      Icons.send,
-                      color: _isTextEntered ? Colors.black : Colors.grey,
+          child: 
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 80),
+                TextField(
+                  controller: _textController,
+                  decoration: InputDecoration(
+                    hintText: 'Search...',
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        if (_isTextEntered) {
+                          //_enteredText = _textController.text;
+                          //_cryptoListBloc.add(LoadCryptoList(completer: null));
+                          _searchFilmsBloc.add(LoadFilmsList(filmName: _textController.text));
+                        }
+                      },
+                      child: Icon(
+                        Icons.send,
+                        color: _isTextEntered ? Colors.black : Colors.grey,
+                      ),
+                    ),
+                    fillColor: Colors.white, 
+                    filled: true, 
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0)
                     ),
                   ),
-                  fillColor: Colors.white, 
-                  filled: true, 
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0)
-                  ),
                 ),
-              ),
-              const SizedBox(height: 80), 
-              Image.asset(
-                'assets/png/empty_films_list.png', 
-                width: 200, 
-                height: 300,
-              )
-            ]
-          )
+                BlocBuilder<SearchFilmsBloc, SearchFilmsState>(
+                  bloc: _searchFilmsBloc,
+                  builder: (context, state) {
+                    if (state is SearchFilmsStateLoaded) {
+                    }
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 80), 
+                        Image.asset(
+                          'assets/png/empty_films_list.png', 
+                          width: 200, 
+                          height: 300,
+                        )
+                      ]
+                    );
+                  }
+                )
+              ]
+            )
         )
     );
   }
