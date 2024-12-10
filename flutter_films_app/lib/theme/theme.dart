@@ -6,7 +6,7 @@ final darkTheme = ThemeData(
   dividerColor: Colors.white24,
   primaryColor: Colors.white,
   appBarTheme: const AppBarTheme(
-    backgroundColor: Color.fromARGB(255, 67, 65, 65),
+    backgroundColor: Colors.transparent,
     titleTextStyle: TextStyle(
       color: Colors.white,
       fontSize: 20,
@@ -18,6 +18,11 @@ final darkTheme = ThemeData(
   primarySwatch: Colors.yellow,
   scaffoldBackgroundColor: const Color.fromARGB(26, 17, 52, 255),
   textTheme: TextTheme(
+    titleMedium: const TextStyle(
+      color: Colors.black,
+      fontWeight: FontWeight.w500,
+      fontSize: 16
+    ),
     bodyMedium: const TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.w500,
@@ -27,7 +32,12 @@ final darkTheme = ThemeData(
       color: Colors.white.withOpacity(0.6),
       fontWeight: FontWeight.w700,
       fontSize: 14
-    )
+    ),
+    bodyLarge: const TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.w200,
+      fontSize: 16
+    ),
   ),
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(

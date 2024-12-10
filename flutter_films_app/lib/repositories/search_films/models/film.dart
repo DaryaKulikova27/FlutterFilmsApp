@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'film.g.dart';
+
+@JsonSerializable()
 class Film extends Equatable {
   const Film ({
     required this.name,
@@ -22,21 +26,13 @@ class Film extends Equatable {
   final String shortDescription;
   final int ageRating;
   final String posterUrl;
-  final List<NameInfo> genres;
-  final List<NameInfo> countries;
+  final List<String> genres;
+  final List<String> countries;
+
+  factory Film.fromJson(Map<String, dynamic> json) => _$FilmFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FilmToJson(this);
   
   @override
   List<Object?> get props => [name, alternativeName, type, year, description, shortDescription, ageRating, posterUrl, genres, countries];
-}
-
-
-class NameInfo extends Equatable {
-  const NameInfo({
-    required this.name
-  });
-
-  final String name;
-
-  @override
-  List<Object?> get props => [name];
 }
