@@ -1,4 +1,5 @@
 import 'package:crypto_coins_list/crypto_currencies_list_app.dart';
+import 'package:crypto_coins_list/repositories/favorites/favorites.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -12,6 +13,10 @@ void main() {
 
   GetIt.I.registerLazySingleton<AbstractFilmsRepository>(() => 
     SearchFilmsRepository(dio: Dio())
+  );
+
+  GetIt.I.registerLazySingleton<AbstractFavoritesRepository>(() => 
+    FavoritesRepository()
   );
   
   runApp(const SearchFilmsApp());

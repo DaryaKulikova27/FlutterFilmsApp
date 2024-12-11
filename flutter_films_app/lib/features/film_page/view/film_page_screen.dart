@@ -1,5 +1,9 @@
+import 'package:crypto_coins_list/features/film_page/bloc/favorites_bloc.dart';
+import 'package:crypto_coins_list/repositories/favorites/favorites.dart';
 import 'package:crypto_coins_list/repositories/search_films/search_films.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class FilmPageScreen extends StatefulWidget {
   final Film film;
@@ -10,12 +14,14 @@ class FilmPageScreen extends StatefulWidget {
 }
 
 class _FilmPageScreen extends State<FilmPageScreen> {
-  late Film? film;
+  late Film film;
+  final _favoritesBloc = FavoritesBloc(GetIt.I<AbstractFavoritesRepository>());
 
   @override
   void initState() {
-    film = widget.film;
     super.initState();
+    film = widget.film;
+    _favoritesBloc.add(CheckFavoriteStatus(film: film));
   }
 
   @override
@@ -29,9 +35,31 @@ class _FilmPageScreen extends State<FilmPageScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text(film!.name),
+      //   automaticallyImplyLeading: true,
+      // ),
       appBar: AppBar(
-        title: Text(film!.name),
+        title: Text(film.name),
         automaticallyImplyLeading: true,
+        actions: [
+          BlocBuilder<FavoritesBloc, FavoritesState>(
+            bloc: _favoritesBloc,
+            builder: (context, state) {
+              final isFavorite = state is FavoritesStateChecked && state.isFavorite;
+              return IconButton(
+                icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+                onPressed: () {
+                  if (isFavorite) {
+                    _favoritesBloc.add(RemoveFromFavorites(film: film));
+                  } else {
+                    _favoritesBloc.add(AddToFavorites(film: film));
+                  }
+                },
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
