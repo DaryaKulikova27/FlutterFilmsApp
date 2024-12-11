@@ -21,6 +21,7 @@ class SearchFilmsRepository implements AbstractFilmsRepository {
     // final docs = data['docs'] as List<dynamic>;
 
     // List<Film> films = docs.map((film) {
+    //   final id = film['id'] as int? ?? 0;
     //   final name = film['name'] as String? ?? 'NoName';
     //   final alternativeName = film['alternativeName'] as String? ?? 'NoAlternativeName';
     //   final type = film['type'] as String? ?? 'NoType';
@@ -38,6 +39,7 @@ class SearchFilmsRepository implements AbstractFilmsRepository {
     //   final countries = countriesList.map((e) => e['name'] as String? ?? '').toList();
 
     //   return Film(
+    //       id: id,
     //       name: name,
     //       alternativeName: alternativeName,
     //       type: type,
@@ -53,6 +55,7 @@ class SearchFilmsRepository implements AbstractFilmsRepository {
 
     final testValuesFilms = [
       const Film(
+        id: 689,
         name: "Гарри Поттер и философский камень", 
         alternativeName: "Harry Potter and the Sorcerer's Stone", 
         type: "movie", 

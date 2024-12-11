@@ -1,11 +1,13 @@
+import 'package:crypto_coins_list/db/models/db_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'film.g.dart';
 
 @JsonSerializable()
-class Film extends Equatable {
+class Film extends Equatable implements DbModel {
   const Film ({
+    required this.id,
     required this.name,
     required this.alternativeName,
     required this.type,
@@ -18,6 +20,8 @@ class Film extends Equatable {
     required this.countries
   });
 
+  @override
+  final int id;
   final String name;
   final String alternativeName;
   final String type;
@@ -33,8 +37,10 @@ class Film extends Equatable {
 
   Map<String, dynamic> toJson() => _$FilmToJson(this);
 
+  @override
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'alternativeName': alternativeName,
       'type': type,
@@ -50,6 +56,7 @@ class Film extends Equatable {
 
   factory Film.fromMap(Map<String, dynamic> map) {
     return Film(
+      id: map['id'] as int,
       name: map['name'] as String,
       alternativeName: map['alternativeName'] as String,
       type: map['type'] as String,
