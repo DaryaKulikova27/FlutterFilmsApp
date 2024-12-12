@@ -1,5 +1,4 @@
-import 'dart:async';
-import 'package:crypto_coins_list/repositories/search_films/search_films.dart';
+import 'package:films_app/repositories/search_films/search_films.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

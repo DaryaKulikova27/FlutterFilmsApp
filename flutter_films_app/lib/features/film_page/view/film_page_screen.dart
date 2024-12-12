@@ -1,6 +1,6 @@
-import 'package:crypto_coins_list/features/film_page/bloc/favorites_bloc.dart';
-import 'package:crypto_coins_list/repositories/favorites/favorites.dart';
-import 'package:crypto_coins_list/repositories/search_films/search_films.dart';
+import 'package:films_app/features/film_page/bloc/favorites_bloc.dart';
+import 'package:films_app/repositories/favorites/favorites.dart';
+import 'package:films_app/repositories/search_films/search_films.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -35,31 +35,9 @@ class _FilmPageScreen extends State<FilmPageScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(film!.name),
-      //   automaticallyImplyLeading: true,
-      // ),
       appBar: AppBar(
         title: Text(film.name),
         automaticallyImplyLeading: true,
-        actions: [
-          BlocBuilder<FavoritesBloc, FavoritesState>(
-            bloc: _favoritesBloc,
-            builder: (context, state) {
-              final isFavorite = state is FavoritesStateChecked && state.isFavorite;
-              return IconButton(
-                icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-                onPressed: () {
-                  if (isFavorite) {
-                    _favoritesBloc.add(RemoveFromFavorites(film: film));
-                  } else {
-                    _favoritesBloc.add(AddToFavorites(film: film));
-                  }
-                },
-              );
-            },
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -69,7 +47,7 @@ class _FilmPageScreen extends State<FilmPageScreen> {
             children: [
               Center(
                 child: Image.network(
-                  film!.posterUrl,
+                  film.posterUrl,
                   height: 300,
                   width: 200,
                   fit: BoxFit.cover,
@@ -90,45 +68,55 @@ class _FilmPageScreen extends State<FilmPageScreen> {
                     )
                   ),
                   const SizedBox(width: 16),
-                  TextButton(
-                    onPressed: () {}, 
-                    child: const Row(
-                      children: [
-                        Icon(Icons.favorite),
-                      ],
-                    )
-                  )
+                  BlocBuilder<FavoritesBloc, FavoritesState>(
+                    bloc: _favoritesBloc,
+                    builder: (context, state) {
+                      final isFavorite = state is FavoritesStateChecked && state.isFavorite;
+                      return TextButton(
+                        onPressed: () {
+                          if (isFavorite) {
+                            _favoritesBloc.add(RemoveFromFavorites(film: film));
+                          } else {
+                            _favoritesBloc.add(AddToFavorites(film: film));
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+                          ],
+                        )
+                      );
+                    },
+                  ),
                 ],
               ),
-              const SizedBox(height: 16
-              ),
-
+              const SizedBox(height: 16),
               Text(
-                film!.description,
+                film.description,
                 style: theme.textTheme.bodyLarge,
               ),
               const SizedBox(height: 16),
 
               Text(
-                'Жанр: ${film!.genres.join(", ")}',
+                'Жанр: ${film.genres.join(", ")}',
                 style: theme.textTheme.bodyMedium,
               ),
               const SizedBox(height: 8),
 
               Text(
-                'Страны: ${film!.countries.join(", ")}',
+                'Страны: ${film.countries.join(", ")}',
                 style: theme.textTheme.bodyMedium,
               ),
               const SizedBox(height: 8),
 
               Text(
-                'Год: ${film!.year}',
+                'Год: ${film.year}',
                 style: theme.textTheme.bodyMedium,
               ),
               const SizedBox(height: 8),
 
               Text(
-                'Возрастная категория: ${film!.ageRating}+',
+                'Возрастная категория: ${film.ageRating}+',
                 style: theme.textTheme.bodyMedium,
               ),
               const SizedBox(height: 50),

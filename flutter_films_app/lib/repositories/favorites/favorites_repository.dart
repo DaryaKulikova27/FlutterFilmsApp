@@ -1,6 +1,6 @@
-import 'package:crypto_coins_list/db/favorites/db_favorites.dart';
-import 'package:crypto_coins_list/repositories/favorites/favorites.dart';
-import 'package:crypto_coins_list/repositories/search_films/models/film.dart';
+import 'package:films_app/db/favorites/db_favorites.dart';
+import 'package:films_app/repositories/favorites/favorites.dart';
+import 'package:films_app/repositories/search_films/models/film.dart';
 
 class FavoritesRepository implements AbstractFavoritesRepository{
   final _dbService = DbFavorites();

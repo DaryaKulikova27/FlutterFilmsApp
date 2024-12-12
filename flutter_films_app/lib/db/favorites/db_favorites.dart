@@ -1,4 +1,4 @@
-import 'package:crypto_coins_list/db/db.dart';
+import 'package:films_app/db/db.dart';
 import '../../repositories/search_films/models/models.dart';
 
 class DbFavorites {

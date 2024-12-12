@@ -1,5 +1,5 @@
-import 'package:crypto_coins_list/db/models/db_model.dart';
-import 'package:crypto_coins_list/repositories/search_films/models/models.dart';
+import 'package:films_app/db/models/db_model.dart';
+import 'package:films_app/repositories/search_films/models/models.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';

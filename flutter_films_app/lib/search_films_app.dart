@@ -1,5 +1,5 @@
-import 'package:crypto_coins_list/router/router.dart';
-import 'package:crypto_coins_list/theme/theme.dart';
+import 'package:films_app/router/router.dart';
+import 'package:films_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilmsApp extends StatelessWidget {

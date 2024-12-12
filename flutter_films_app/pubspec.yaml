@@ -1,5 +1,5 @@
-name: crypto_coins_list
-description: "Cool crypto application"
+name: films_app
+description: "App for searching and watching films"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 

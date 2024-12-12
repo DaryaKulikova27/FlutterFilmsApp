@@ -1,4 +1,4 @@
-import 'package:crypto_coins_list/db/models/db_model.dart';
+import 'package:films_app/db/models/db_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -49,8 +49,8 @@ class Film extends Equatable implements DbModel {
       'shortDescription': shortDescription,
       'ageRating': ageRating,
       'posterUrl': posterUrl,
-      'genres': genres,
-      'countries': countries,
+      'genres': genres.join(",").toString(),
+      'countries': countries.join(",").toString(),
     };
   }
 
@@ -65,8 +65,8 @@ class Film extends Equatable implements DbModel {
       shortDescription: map['shortDescription'] as String,
       ageRating: map['ageRating'] as int,
       posterUrl: map['posterUrl'] as String,
-      genres: List<String>.from(map['genres']),
-      countries: List<String>.from(map['countries']),
+      genres: map['genres'].split(','),
+      countries: map['countries'].split(',')
     );
   }
   

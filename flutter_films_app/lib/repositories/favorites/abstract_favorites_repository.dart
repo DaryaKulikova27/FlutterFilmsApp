@@ -1,4 +1,4 @@
-import 'package:crypto_coins_list/repositories/search_films/models/film.dart';
+import 'package:films_app/repositories/search_films/models/film.dart';
 
 abstract class AbstractFavoritesRepository {
   Future<void> addToFavorites(Film film);

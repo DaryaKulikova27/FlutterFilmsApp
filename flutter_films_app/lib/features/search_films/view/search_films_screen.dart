@@ -1,9 +1,10 @@
-import 'package:crypto_coins_list/features/search_films/bloc/search_films_bloc.dart';
-import 'package:crypto_coins_list/features/search_films/widgets/film_tile.dart';
-import 'package:crypto_coins_list/repositories/search_films/search_films.dart';
+import 'package:films_app/features/search_films/bloc/search_films_bloc.dart';
+import 'package:films_app/features/search_films/widgets/film_tile.dart';
+import 'package:films_app/repositories/search_films/search_films.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 class SearchFilmsScreen extends StatefulWidget {
   const SearchFilmsScreen({super.key, required this.title});
@@ -104,7 +105,13 @@ class _SearchFilmsScreenState extends State<SearchFilmsScreen> {
                 ),
               ]
             )
-        )
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.go('/favorites');
+          },
+          child: const Icon(Icons.favorite_sharp),
+        ),
     );
   }
 }

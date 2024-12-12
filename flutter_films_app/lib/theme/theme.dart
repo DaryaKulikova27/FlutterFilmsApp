@@ -52,5 +52,9 @@ final darkTheme = ThemeData(
         fontWeight: FontWeight.bold,
       ),
     ),
-  )
+  ),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: Color.fromARGB(255, 254, 177, 231),
+    foregroundColor: Colors.white,
+  ),
 );

@@ -1,4 +1,4 @@
-import 'package:crypto_coins_list/repositories/favorites/favorites.dart';
+import 'package:films_app/repositories/favorites/favorites.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../repositories/search_films/models/models.dart';
