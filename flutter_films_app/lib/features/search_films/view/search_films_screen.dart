@@ -1,5 +1,5 @@
 import 'package:films_app/features/search_films/bloc/search_films_bloc.dart';
-import 'package:films_app/features/search_films/widgets/film_tile.dart';
+import 'package:films_app/features/search_films/search_films.dart';
 import 'package:films_app/repositories/search_films/search_films.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +38,12 @@ class _SearchFilmsScreenState extends State<SearchFilmsScreen> {
     });
   }
 
+  void _clearSearch() {
+    _textController.clear();
+    _updateTextState();
+    _searchFilmsBloc.add(ClearSearch());
+  }
+
   @override
   void dispose() {
     _textController.dispose();
@@ -63,16 +69,29 @@ class _SearchFilmsScreenState extends State<SearchFilmsScreen> {
               decoration: InputDecoration(
                 hintText: 'Поиск...',
                 prefixIcon: const Icon(Icons.search),
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    if (_isTextEntered) {
-                      _searchFilmsBloc.add(LoadFilmsList(filmName: _textController.text));
-                    }
-                  },
-                  child: Icon(
-                    Icons.send,
-                    color: _isTextEntered ? Colors.black : Colors.grey,
-                  ),
+                suffixIcon: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (_isTextEntered)
+                      GestureDetector(
+                        onTap: _clearSearch,
+                        child: const Icon(Icons.clear, color: Colors.black),
+                      ),
+                    const SizedBox(width: 8),
+                    GestureDetector(
+                      onTap: () {
+                        if (_isTextEntered) {
+                          _searchFilmsBloc.add(LoadFilmsList(
+                              filmName: _textController.text));
+                        }
+                      },
+                      child: Icon(
+                        Icons.send,
+                        color: _isTextEntered ? Colors.black : Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(width: 10)
+                  ],
                 ),
                 fillColor: Colors.white,
                 filled: true,
@@ -85,7 +104,11 @@ class _SearchFilmsScreenState extends State<SearchFilmsScreen> {
               bloc: _searchFilmsBloc,
               builder: (context, state) {
                 if (state is SearchFilmsStateLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
                 }
 
                 if (state is SearchFilmsStateLoaded) {

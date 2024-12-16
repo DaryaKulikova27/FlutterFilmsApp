@@ -9,6 +9,7 @@ class SearchFilmsBloc extends Bloc<SearchFilmsEvent, SearchFilmsState> {
   SearchFilmsBloc(this.searchFilmsRepository) : super(SearchFilmsStateInitial()) {
     on<LoadFilmsList>(_onLoadFilmsList);
     on<LoadMoreFilms>(_onLoadMoreFilms);
+    on<ClearSearch>(_onClearSearch);
   }
 
   final AbstractFilmsRepository searchFilmsRepository;
@@ -16,7 +17,7 @@ class SearchFilmsBloc extends Bloc<SearchFilmsEvent, SearchFilmsState> {
 
   int _currentPage = 1;
   bool _hasMore = true; 
-  final filmsNumberOnPage = 6;
+  final filmsNumberOnPage = 10;
   List<Film> _allFilms = [];
 
   Future<void> _onLoadFilmsList(LoadFilmsList event, Emitter<SearchFilmsState> emit) async {
@@ -38,7 +39,7 @@ class SearchFilmsBloc extends Bloc<SearchFilmsEvent, SearchFilmsState> {
       isFetching = false;
     }
   }
-  
+
   Future<void> _onLoadMoreFilms(LoadMoreFilms event, Emitter<SearchFilmsState> emit) async {
     if (!_hasMore || isFetching) return;
 
@@ -57,5 +58,9 @@ class SearchFilmsBloc extends Bloc<SearchFilmsEvent, SearchFilmsState> {
     } finally {
       isFetching = false;
     }
+  }
+
+  void _onClearSearch(ClearSearch event, Emitter<SearchFilmsState> emit) {
+    emit(SearchFilmsStateInitial());
   }
 }

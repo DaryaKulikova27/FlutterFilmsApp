@@ -23,3 +23,8 @@ class LoadMoreFilms extends SearchFilmsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class ClearSearch extends SearchFilmsEvent {
+  @override
+  List<Object?> get props => [];
+}

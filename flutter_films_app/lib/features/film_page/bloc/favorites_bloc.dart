@@ -7,6 +7,8 @@ part 'favorites_event.dart';
 part 'favorites_state.dart';
 
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
+  final AbstractFavoritesRepository favoritesRepository;
+
   FavoritesBloc(this.favoritesRepository) : super(FavoritesStateInitial()) {
     
     on<AddToFavorites>((event, emit) async {
@@ -45,6 +47,4 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       }
     });
   }
-
-  final AbstractFavoritesRepository favoritesRepository;
 }

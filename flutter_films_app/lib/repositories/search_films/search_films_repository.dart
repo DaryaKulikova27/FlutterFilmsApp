@@ -13,7 +13,7 @@ class SearchFilmsRepository implements AbstractFilmsRepository {
     const apiKey = 'KCSGV2J-HGTMRV3-JJGE791-XKKS3MW';
     final query = Uri.encodeComponent(filmName.trim());
     final url =
-        'https://api.kinopoisk.dev/v1.4/movie/search?page=$currentPage&limit=6&query=$query';
+        'https://api.kinopoisk.dev/v1.4/movie/search?page=$currentPage&limit=10&query=$query';
     final response = await dio.get(
       url,
       options: Options(headers: {'X-API-KEY': apiKey}),
