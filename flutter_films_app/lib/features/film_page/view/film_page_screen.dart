@@ -46,12 +46,26 @@ class _FilmPageScreen extends State<FilmPageScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Image.network(
-                  film.posterUrl,
-                  height: 300,
-                  width: 200,
-                  fit: BoxFit.cover,
-                ),
+                child: 
+                  film.posterUrl.isNotEmpty
+                  ? Image.network(
+                    film.posterUrl,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/png/no_image.png',
+                        fit: BoxFit.cover,
+                      );
+                    },
+                    height: 300,
+                    width: 200,
+                    fit: BoxFit.cover,
+                  )
+                  : Image.asset(
+                    'assets/png/no_image.png',
+                    height: 300,
+                    width: 200,
+                    fit: BoxFit.cover,
+                  )
               ),
               const SizedBox(height: 30),
 

@@ -14,14 +14,28 @@ class FilmTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return ListTile(
-      leading: Image.network(film.posterUrl),
+      leading: film.posterUrl.isNotEmpty
+      ? Image.network(
+          film.posterUrl,
+          errorBuilder: (context, error, stackTrace) {
+            return Image.asset(
+              'assets/png/no_image.png',
+              fit: BoxFit.cover,
+            );
+          },
+          fit: BoxFit.cover,
+        )
+      : Image.asset(
+          'assets/png/no_image.png',
+          fit: BoxFit.cover,
+        ),
       title: Text(
-        film.name, 
+        film.name,
         style: theme.textTheme.bodyMedium,
       ),
       subtitle: Text(
-        '${film.shortDescription}\$', 
-        style: theme.textTheme.labelSmall
+        film.shortDescription,
+        style: theme.textTheme.labelSmall,
       ),
       trailing: const Icon(Icons.arrow_forward_ios_rounded),
       onTap: () => {

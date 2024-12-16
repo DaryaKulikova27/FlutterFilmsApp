@@ -13,15 +13,20 @@ class SearchFilmsStateLoading extends SearchFilmsState {
 }
 
 class SearchFilmsStateLoaded extends SearchFilmsState {
+  final List<Film> films;
+  final bool hasMore;
+  final bool isLoadingMore;
+
   SearchFilmsStateLoaded({
     required this.films,
+    required this.hasMore,
+    required this.isLoadingMore,
   });
-
-  final List<Film> films;
   
   @override
-  List<Object?> get props => [films];
+  List<Object?> get props => [films, hasMore, isLoadingMore];
 }
+
 
 class SearchFilmsStateLoadingFailure extends SearchFilmsState {
   SearchFilmsStateLoadingFailure({

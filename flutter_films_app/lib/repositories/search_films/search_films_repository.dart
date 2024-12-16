@@ -8,11 +8,12 @@ class SearchFilmsRepository implements AbstractFilmsRepository {
     required this.dio
   });
   
-  Future<List<Film>> searchFilms(String filmName) async {
+  @override
+  Future<List<Film>> searchFilms(String filmName, int currentPage) async {
     const apiKey = 'KCSGV2J-HGTMRV3-JJGE791-XKKS3MW';
     final query = Uri.encodeComponent(filmName.trim());
     final url =
-        'https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=10&query=$query';
+        'https://api.kinopoisk.dev/v1.4/movie/search?page=$currentPage&limit=6&query=$query';
     final response = await dio.get(
       url,
       options: Options(headers: {'X-API-KEY': apiKey}),
