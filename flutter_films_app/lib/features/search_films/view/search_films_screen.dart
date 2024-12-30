@@ -15,6 +15,7 @@ class SearchFilmsScreen extends StatefulWidget {
 }
 
 class _SearchFilmsScreenState extends State<SearchFilmsScreen> {
+  // test commit
   final _searchFilmsBloc = SearchFilmsBloc(GetIt.I<AbstractFilmsRepository>());
   final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
