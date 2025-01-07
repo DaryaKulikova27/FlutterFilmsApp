@@ -16,22 +16,6 @@ class Trailer extends Equatable {
     required this.site,
     required this.type,
   });
-  
-  // factory Trailer.fromJSON(Map<String, dynamic> json) => Trailer(
-  //       url: json['url'],
-  //       name: json['name'],
-  //       site: json['site'],
-  //       type: json['type'],
-  //     );
-
-  // Map<String, dynamic> toJson() {
-  //   return {
-  //     'url': url,
-  //     'name': name,
-  //     'site': site,
-  //     'type': type,
-  //   };
-  // }
 
   factory Trailer.fromJson(Map<String, dynamic> json) => _$TrailerFromJson(json);
 

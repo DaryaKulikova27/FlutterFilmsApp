@@ -1,4 +1,4 @@
-import 'package:films_app/features/film_page/bloc/favorites_bloc.dart';
+import 'package:films_app/features/favorites_page/bloc/favorites_bloc.dart';
 import 'package:films_app/repositories/favorites/favorites.dart';
 import 'package:films_app/repositories/search_films/search_films.dart';
 import 'package:flutter/material.dart';

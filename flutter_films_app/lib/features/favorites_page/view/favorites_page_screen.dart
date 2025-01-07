@@ -1,9 +1,9 @@
-import 'package:films_app/features/film_page/bloc/favorites_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import '../../../repositories/favorites/favorites.dart';
 import '../../search_films/widgets/film_tile.dart';
+import '../bloc/favorites_bloc.dart';
 
 class FavoritesPageScreen extends StatefulWidget {
   const FavoritesPageScreen({super.key});
