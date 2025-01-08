@@ -15,6 +15,7 @@ class FilmInfoBloc extends Bloc<FilmInfoEvent, FilmInfoState> {
 
   Future<void> _onSearchFilmById(SearchFilmById event, Emitter<FilmInfoState> emit) async {
     try {
+      emit(FilmInfoStateLoading());
       final film = await filmInfoRepository.getFilmById(event.id);
       emit(FilmInfoStateLoaded(film: film));
     } catch (e) {

@@ -11,15 +11,17 @@ FilmInfoModel _$FilmInfoModelFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       description: json['description'] as String,
-      rating: (json['rating'] as num).toDouble(),
-      ageRating: json['ageRating'] as String,
-      genres:
-          (json['genres'] as List<dynamic>).map((e) => e as String).toList(),
-      premierDate: json['premierDate'] as String,
-      trailers: (json['trailers'] as List<dynamic>)
-          .map((e) => Trailer.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      poster: json['poster'] as String,
+      rating: json['rating']?['kp'] + 0.0 ?? 0.0,
+      ageRating: json['ageRating'] != null ? '${json['ageRating']}+' : 'н.д.',
+      genres: List.generate(json['genres'].length, (index) => json['genres'][index]['name']),
+      premierDate: json['premiere']['world'] ?? '',
+      trailers: List.generate(
+          json['videos']?['trailers'].length ?? 0,
+          (index) => Trailer.fromJson(
+            json['videos']?['trailers']?[index],
+          ),
+        ),
+      poster: json['backdrop']?['url'] ?? '',
     );
 
 Map<String, dynamic> _$FilmInfoModelToJson(FilmInfoModel instance) =>

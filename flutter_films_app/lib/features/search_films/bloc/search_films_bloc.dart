@@ -18,7 +18,7 @@ class SearchFilmsBloc extends Bloc<SearchFilmsEvent, SearchFilmsState> {
   int _currentPage = 1;
   bool _hasMore = true; 
   final filmsNumberOnPage = 10;
-  List<Film> _allFilms = [];
+  final List<Film> _allFilms = [];
 
   Future<void> _onLoadFilmsList(LoadFilmsList event, Emitter<SearchFilmsState> emit) async {
     try {
