@@ -24,10 +24,3 @@ class Trailer extends Equatable {
   @override
   List<Object?> get props => [url, name, site, type];
 }
-
-
-//         "url": "https://www.youtube.com/embed/Xtf3c-Y20Lw",
-//         "name": "Ведьмак (1 сезон) — Русский трейлер (Озвучка, 2019)",
-//         "site": "youtube",
-//         "type": "TRAILER"
-//

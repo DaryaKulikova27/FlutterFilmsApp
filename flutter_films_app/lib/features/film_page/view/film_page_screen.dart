@@ -20,7 +20,7 @@ class _FilmPageScreen extends State<FilmPageScreen> {
   late Film film;
   late FilmInfoModel filmInfo;
   final _favoritesBloc = FavoritesBloc(GetIt.I<AbstractFavoritesRepository>());
-  final FilmInfoBloc _filmInfoBloc = FilmInfoBloc(GetIt.I<AbstractFilmInfoRepository>());
+  final _filmInfoBloc = FilmInfoBloc(GetIt.I<AbstractFilmInfoRepository>());
   String? trailerUrl;
 
   @override
@@ -184,21 +184,35 @@ class _FilmPageScreen extends State<FilmPageScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          content: AspectRatio(
-            aspectRatio: 16 / 9,
-            child: YoutubePlayer(
-              controller: YoutubePlayerController(
-                initialVideoId: videoId,
-                flags: const YoutubePlayerFlags(
-                  autoPlay: true,
-                  mute: false,
-                  hideThumbnail: true,
+        return Stack(
+          children: [
+            GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Container(
+                color: Colors.black.withOpacity(0.5),
+              ),
+            ),
+            Center(
+              child: Dialog(
+                insetPadding: const EdgeInsets.all(16),
+                backgroundColor: Colors.transparent,
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: YoutubePlayer(
+                    controller: YoutubePlayerController(
+                      initialVideoId: videoId,
+                      flags: const YoutubePlayerFlags(
+                        autoPlay: true,
+                        mute: false,
+                        hideThumbnail: true,
+                      ),
+                    ),
+                    showVideoProgressIndicator: true,
+                  ),
                 ),
               ),
-              showVideoProgressIndicator: true,
             ),
-          ),
+          ],
         );
       },
     );
