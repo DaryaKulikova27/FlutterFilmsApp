@@ -1,6 +1,6 @@
 {
-    "name": "crypto_coins_list",
-    "short_name": "crypto_coins_list",
+    "name": "films_app",
+    "short_name": "films_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
