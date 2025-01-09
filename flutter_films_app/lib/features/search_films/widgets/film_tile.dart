@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../repositories/search_films/models/models.dart';
@@ -15,16 +16,21 @@ class FilmTile extends StatelessWidget {
     final theme = Theme.of(context);
     return ListTile(
       leading: film.posterUrl.isNotEmpty
-      ? Image.network(
-          film.posterUrl,
-          errorBuilder: (context, error, stackTrace) {
-            return Image.asset(
-              'assets/png/no_image.png',
-              fit: BoxFit.cover,
-            );
-          },
-          fit: BoxFit.cover,
+      ? CachedNetworkImage(
+          imageUrl: film.posterUrl, 
+          placeholder: (context, url) => const CircularProgressIndicator(), 
+          errorWidget: (context, url, error) => Image.asset('assets/png/no_image.png', fit: BoxFit.cover)
         )
+      // ? Image.network(
+      //     film.posterUrl,
+      //     errorBuilder: (context, error, stackTrace) {
+      //       return Image.asset(
+      //         'assets/png/no_image.png',
+      //         fit: BoxFit.cover,
+      //       );
+      //     },
+      //     fit: BoxFit.cover,
+      //   )
       : Image.asset(
           'assets/png/no_image.png',
           fit: BoxFit.cover,

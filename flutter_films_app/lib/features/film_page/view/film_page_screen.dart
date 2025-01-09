@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:films_app/features/favorites_page/bloc/favorites_bloc.dart';
 import 'package:films_app/features/film_page/bloc/film_info_bloc.dart';
 import 'package:films_app/repositories/favorites/favorites.dart';
@@ -64,14 +65,13 @@ class _FilmPageScreen extends State<FilmPageScreen> {
                   children: [
                     Center(
                       child: film.posterUrl.isNotEmpty
-                          ? Image.network(
-                              film.posterUrl,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                  'assets/png/no_image.png',
-                                  fit: BoxFit.cover,
-                                );
-                              },
+                          ? CachedNetworkImage(
+                              imageUrl: film.posterUrl,
+                              placeholder: (context, url) => const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) => Image.asset(
+                                'assets/png/no_image.png',
+                                fit: BoxFit.cover,
+                              ),
                               height: 300,
                               width: 200,
                               fit: BoxFit.cover,
