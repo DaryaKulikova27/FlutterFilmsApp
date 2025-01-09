@@ -5,6 +5,7 @@ final darkTheme = ThemeData(
   useMaterial3: true,
   dividerColor: Colors.white24,
   primaryColor: Colors.white,
+  fontFamily: 'Figtree',
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.transparent,
     titleTextStyle: TextStyle(

@@ -13,7 +13,7 @@ void main() async {
   await DB.instance.init();
 
   GetIt.I.registerLazySingleton<AbstractFilmsRepository>(() => 
-    SearchFilmsRepository(dio: Dio())
+    SearchFilmsRepository()
   );
 
   GetIt.I.registerLazySingleton<AbstractFavoritesRepository>(() => 
@@ -21,7 +21,7 @@ void main() async {
   );
 
   GetIt.I.registerLazySingleton<AbstractFilmInfoRepository>(() => 
-    FilmInfoRepository(dio: Dio())
+    FilmInfoRepository()
   );
   
   runApp(const SearchFilmsApp());

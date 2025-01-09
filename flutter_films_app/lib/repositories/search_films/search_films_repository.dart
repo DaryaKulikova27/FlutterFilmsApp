@@ -1,22 +1,16 @@
 import 'package:films_app/repositories/search_films/search_films.dart';
-import 'package:dio/dio.dart';
+import 'package:films_app/utils/api_manager.dart';
 
 class SearchFilmsRepository implements AbstractFilmsRepository {
-
-  final Dio dio;
-  SearchFilmsRepository({
-    required this.dio
-  });
   
   @override
   Future<List<Film>> searchFilms(String filmName, int currentPage) async {
-    const apiKey = 'KCSGV2J-HGTMRV3-JJGE791-XKKS3MW';
-    final query = Uri.encodeComponent(filmName.trim());
-    final url =
-        'https://api.kinopoisk.dev/v1.4/movie/search?page=$currentPage&limit=10&query=$query';
-    final response = await dio.get(
-      url,
-      options: Options(headers: {'X-API-KEY': apiKey}),
+    var response = await apiManager.get(
+      '/v1.4/movie/search',
+      queryParameters: {
+        'query': filmName,
+        'page': currentPage.toString(),
+      },
     );
     final data = response.data as Map<String, dynamic>;
     final docs = data['docs'] as List<dynamic>;

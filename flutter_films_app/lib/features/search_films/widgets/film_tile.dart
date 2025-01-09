@@ -21,16 +21,6 @@ class FilmTile extends StatelessWidget {
           placeholder: (context, url) => const CircularProgressIndicator(), 
           errorWidget: (context, url, error) => Image.asset('assets/png/no_image.png', fit: BoxFit.cover)
         )
-      // ? Image.network(
-      //     film.posterUrl,
-      //     errorBuilder: (context, error, stackTrace) {
-      //       return Image.asset(
-      //         'assets/png/no_image.png',
-      //         fit: BoxFit.cover,
-      //       );
-      //     },
-      //     fit: BoxFit.cover,
-      //   )
       : Image.asset(
           'assets/png/no_image.png',
           fit: BoxFit.cover,
