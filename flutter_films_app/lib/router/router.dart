@@ -1,3 +1,4 @@
+import 'package:films_app/features/custom_graph/view/custom_graph_screen.dart';
 import 'package:films_app/repositories/search_films/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -29,7 +30,8 @@ final GoRouter router = GoRouter(
           path: '/favorites',
           pageBuilder: (BuildContext context, GoRouterState state) {
             return CustomTransitionPage(
-              child: const FavoritesPageScreen(),
+              // child: const FavoritesPageScreen(),
+              child: CustomGraphScreen(),
               transitionDuration: Duration.zero,
               reverseTransitionDuration: Duration.zero, 
               transitionsBuilder: (context, animation, secondaryAnimation, child) {
